@@ -1,4 +1,4 @@
-import{h as b,i as a,k as S,l as t}from"./index-DZKib4c0.js";const f=(n={})=>{const e=n.databaseEdition,E=`
+import{h as b,i as a,k as S,l as t}from"./index-CSHmwOuo.js";const f=(n={})=>{const e=n.databaseEdition,E=`
                 AND connamespace::regnamespace::text NOT IN ('auth', 'extensions', 'pgsodium', 'realtime', 'storage', 'vault')
     `,s=`
                 AND cols.table_schema NOT IN ('auth', 'extensions', 'pgsodium', 'realtime', 'storage', 'vault')
