@@ -5,9 +5,7 @@ export const Link = React.forwardRef<
     HTMLAnchorElement,
     React.AnchorHTMLAttributes<HTMLAnchorElement>
 >(({ className, children, ...props }, ref) => {
-    const href = props.href?.startsWith('/')
-        ? `${import.meta.env.VITE_BASE_URL}${props.href}`
-        : props.href;
+    const href = props.href?.startsWith('/') ? `#${props.href}` : props.href;
     return (
         <a
             ref={ref}

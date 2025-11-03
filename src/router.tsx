@@ -1,5 +1,5 @@
 import type { RouteObject } from 'react-router-dom';
-import { createBrowserRouter } from 'react-router-dom';
+import { createHashRouter } from 'react-router-dom';
 import {
     TemplatePage,
     type TemplatePageLoaderData,
@@ -97,6 +97,6 @@ const routes: RouteObject[] = [
     },
 ];
 
-export const router = createBrowserRouter(routes, {
-    basename: import.meta.env.VITE_BASE_URL || '/',
+export const router = createHashRouter(routes, {
+    basename: '/',
 });
