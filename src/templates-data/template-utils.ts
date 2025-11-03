@@ -2,6 +2,7 @@ import type { Diagram } from '@/lib/domain/diagram';
 import type { Template } from './templates-data';
 import { removeDups } from '@/lib/utils';
 import { cloneDiagram } from '@/lib/clone';
+import { templates } from '@/templates-data/templates-data';
 
 export const convertTemplateToNewDiagram = (template: Template): Diagram => {
     const diagramId = template.diagram.id;
@@ -22,7 +23,7 @@ export const getTemplatesAndAllTags = async ({
     featured?: boolean;
     tag?: string;
 } = {}): Promise<{ templates: Template[]; tags: string[] }> => {
-    const { templates } = await import('@/templates-data/templates-data');
+    // const { templates } = await import('@/templates-data/templates-data');
     const allTags = removeDups(templates?.flatMap((t) => t.tags) ?? []);
 
     if (featured) {

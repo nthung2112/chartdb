@@ -1,45 +1,32 @@
-import React from 'react';
 import type { RouteObject } from 'react-router-dom';
 import { createBrowserRouter } from 'react-router-dom';
-import type { TemplatePageLoaderData } from './pages/template-page/template-page';
+import {
+    TemplatePage,
+    type TemplatePageLoaderData,
+} from './pages/template-page/template-page';
 import type { TemplatesPageLoaderData } from './pages/templates-page/templates-page';
 import { getTemplatesAndAllTags } from './templates-data/template-utils';
+
+import { EditorPage } from './pages/editor-page/editor-page';
+import { ExamplesPage } from './pages/examples-page/examples-page';
+import { TemplatesPage } from './pages/templates-page/templates-page';
+import { CloneTemplatePage } from './pages/clone-template-page/clone-template-page';
+import { NotFoundPage } from './pages/not-found-page/not-found-page';
+import { templates } from './templates-data/templates-data';
 
 const routes: RouteObject[] = [
     ...['', 'diagrams/:diagramId'].map((path) => ({
         path,
-        async lazy() {
-            const { EditorPage } = await import(
-                './pages/editor-page/editor-page'
-            );
-
-            return {
-                element: <EditorPage />,
-            };
-        },
+        Component: EditorPage,
     })),
     {
         path: 'examples',
-        async lazy() {
-            const { ExamplesPage } = await import(
-                './pages/examples-page/examples-page'
-            );
-            return {
-                element: <ExamplesPage />,
-            };
-        },
+        Component: ExamplesPage,
     },
     {
         id: 'templates',
         path: 'templates',
-        async lazy() {
-            const { TemplatesPage } = await import(
-                './pages/templates-page/templates-page'
-            );
-            return {
-                element: <TemplatesPage />,
-            };
-        },
+        Component: TemplatesPage,
 
         loader: async (): Promise<TemplatesPageLoaderData> => {
             const { tags, templates } = await getTemplatesAndAllTags();
@@ -53,14 +40,7 @@ const routes: RouteObject[] = [
     {
         id: 'templates_featured',
         path: 'templates/featured',
-        async lazy() {
-            const { TemplatesPage } = await import(
-                './pages/templates-page/templates-page'
-            );
-            return {
-                element: <TemplatesPage />,
-            };
-        },
+        Component: TemplatesPage,
         loader: async (): Promise<TemplatesPageLoaderData> => {
             const { tags, templates } = await getTemplatesAndAllTags({
                 featured: true,
@@ -75,14 +55,7 @@ const routes: RouteObject[] = [
     {
         id: 'templates_tags',
         path: 'templates/tags/:tag',
-        async lazy() {
-            const { TemplatesPage } = await import(
-                './pages/templates-page/templates-page'
-            );
-            return {
-                element: <TemplatesPage />,
-            };
-        },
+        Component: TemplatesPage,
         loader: async ({ params }): Promise<TemplatesPageLoaderData> => {
             const { tags, templates } = await getTemplatesAndAllTags({
                 tag: params.tag?.replace(/-/g, ' '),
@@ -97,18 +70,8 @@ const routes: RouteObject[] = [
     {
         id: 'templates_templateSlug',
         path: 'templates/:templateSlug',
-        async lazy() {
-            const { TemplatePage } = await import(
-                './pages/template-page/template-page'
-            );
-            return {
-                element: <TemplatePage />,
-            };
-        },
+        Component: TemplatePage,
         loader: async ({ params }): Promise<TemplatePageLoaderData> => {
-            const { templates } = await import(
-                './templates-data/templates-data'
-            );
             return {
                 template: templates.find(
                     (template) => template.slug === params.templateSlug
@@ -119,18 +82,8 @@ const routes: RouteObject[] = [
     {
         id: 'templates_load',
         path: 'templates/clone/:templateSlug',
-        async lazy() {
-            const { CloneTemplatePage } = await import(
-                './pages/clone-template-page/clone-template-page'
-            );
-            return {
-                element: <CloneTemplatePage />,
-            };
-        },
+        Component: CloneTemplatePage,
         loader: async ({ params }) => {
-            const { templates } = await import(
-                './templates-data/templates-data'
-            );
             return {
                 template: templates.find(
                     (template) => template.slug === params.templateSlug
@@ -140,14 +93,7 @@ const routes: RouteObject[] = [
     },
     {
         path: '*',
-        async lazy() {
-            const { NotFoundPage } = await import(
-                './pages/not-found-page/not-found-page'
-            );
-            return {
-                element: <NotFoundPage />,
-            };
-        },
+        Component: NotFoundPage,
     },
 ];
 

@@ -33,6 +33,7 @@ import { ChartDBProvider } from '@/context/chartdb-context/chartdb-provider';
 import { Helmet } from 'react-helmet-async';
 import { APP_URL, HOST_URL } from '@/lib/env';
 import { Link } from '@/components/link/link';
+import { DiffProvider } from '@/context/diff-context/diff-provider';
 
 export interface TemplatePageLoaderData {
     template: Template | undefined;
@@ -308,7 +309,9 @@ export const TemplatePage: React.FC = () => (
     <LocalConfigProvider>
         <ThemeProvider>
             <ReactFlowProvider>
-                <TemplatePageComponent />
+                <DiffProvider>
+                    <TemplatePageComponent />
+                </DiffProvider>
             </ReactFlowProvider>
         </ThemeProvider>
     </LocalConfigProvider>

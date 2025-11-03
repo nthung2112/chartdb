@@ -28,6 +28,7 @@ import { useTheme } from '@/hooks/use-theme';
 import { useLocalConfig } from '@/hooks/use-local-config';
 import { useNavigate } from 'react-router-dom';
 import { useAlert } from '@/context/alert-context/alert-context';
+import { Link } from '@/components/link/link';
 
 export interface MenuProps {}
 
@@ -521,6 +522,16 @@ export const Menu: React.FC<MenuProps> = () => {
             <MenubarMenu>
                 <MenubarTrigger>{t('menu.help.help')}</MenubarTrigger>
                 <MenubarContent>
+                    <MenubarItem>
+                        <Link href="/examples" className="text-inherit">
+                            View Examples
+                        </Link>
+                    </MenubarItem>
+                    <MenubarItem>
+                        <Link href="/templates" className="text-inherit">
+                            View Templates
+                        </Link>
+                    </MenubarItem>
                     <MenubarItem onClick={openChartDBDocs}>
                         {t('menu.help.docs_website')}
                     </MenubarItem>
